@@ -1,4 +1,4 @@
-package com.pacmankata.config
+package com.atary.pacman.config
 
 object Banner {
     private const val TEXT = "  ____                      _              _____                        _         _        \n" +

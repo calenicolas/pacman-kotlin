@@ -1,7 +1,7 @@
 package com.atary.pacman.controller
 
 import com.atary.pacman.AtaryPacman
-import com.pacmankata.config.Environment
+import com.atary.pacman.config.Environment
 import io.vertx.core.http.HttpServerOptions
 import io.vertx.reactivex.core.AbstractVerticle
 import io.vertx.reactivex.core.http.HttpServer
