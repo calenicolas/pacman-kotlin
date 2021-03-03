@@ -137,35 +137,16 @@ object PacmanMoves : Spek({
                 givenATestBoard()
             }
 
-            When("pacman goes to right thrice") {
+            When("pacman goes to right thrice and one left") {
                 pacmanMoves(pacman, "RIGHT", 3)
                 pacmanMoves(pacman, "LEFT", 1)
             }
 
-            Then("pacman stays at limit") {
+            Then("pacman moves at last position of the row") {
                 val expectedBoard = listOf(
                     listOf(" ", " ", " ", " ", "P")
                 )
                 verify(presenter, times(2)).render(expectedBoard)
-            }
-        }
-
-        Scenario("pacman moves down") {
-            Given("a board and pacman in its center") {
-                givenADoubleTestBoard()
-            }
-
-            When("pacman goes to right thrice") {
-                pacmanMoves(pacman, "RIGHT", 2)
-                pacmanMoves(pacman, "DOWN", 1)
-            }
-
-            Then("pacman stays at limit") {
-                val expectedBoard = listOf(
-                    listOf(" ", " ", " ", " ", " "),
-                    listOf(" ", " ", " ", " ", "P")
-                )
-                verify(presenter).render(expectedBoard)
             }
         }
 
@@ -186,6 +167,23 @@ object PacmanMoves : Spek({
                 )
                 verify(presenter).render(expectedBoard)
             }
+
+            Given("a board and pacman in its center") {
+                givenADoubleTestBoard()
+            }
+
+            When("pacman goes to right twice and once down") {
+                pacmanMoves(pacman, "RIGHT", 2)
+                pacmanMoves(pacman, "DOWN", 1)
+            }
+
+            Then("pacman moves at the bottom right corner of the board") {
+                val expectedBoard = listOf(
+                    listOf(" ", " ", " ", " ", " "),
+                    listOf(" ", " ", " ", " ", "P")
+                )
+                verify(presenter).render(expectedBoard)
+            }
         }
 
         Scenario("pacman moves up") {
@@ -193,12 +191,12 @@ object PacmanMoves : Spek({
                 givenADoubleTestBoard()
             }
 
-            When("pacman goes to right thrice") {
+            When("pacman goes down and up") {
                 pacmanMoves(pacman, "DOWN", 1)
                 pacmanMoves(pacman, "UP", 1)
             }
 
-            Then("pacman stays at center") {
+            Then("pacman moves to center") {
                 val expectedBoard = listOf(
                     listOf(" ", " ", "P", " ", " "),
                     listOf(" ", " ", " ", " ", " ")
@@ -218,7 +216,7 @@ object PacmanMoves : Spek({
                 pacmanMoves(pacman, "DOWN", 1)
             }
 
-            Then("pacman keeps moving") {
+            Then("pacman can move after going outside the board limits") {
                 val expectedBoard = listOf(
                     listOf(" ", " ", " ", " ", " "),
                     listOf(" ", " ", " ", "P", " ")
@@ -254,7 +252,7 @@ object PacmanMoves : Spek({
                 pacmanMoves(pacman, "RIGHT", 10)
             }
 
-            Then("pacman goes down") {
+            Then("pacman moves to the first position of the row") {
                 verify(presenter).render(expectedTurnArroundTestBoard)
             }
         }
