@@ -95,6 +95,10 @@ val board = listOf(
 )
 ```
 
+### Pruebas
+Si levantan [Application](./src/main/kotlin/com/pacmankata/Application.kt) van a ver que se levanta un servidor, para
+poder controlar el pacman aca esta el [control](./control.html).
+
 El mismo tambien esta en [board](./board)
 
 ## Iteración 1: _Movimiento_
