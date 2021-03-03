@@ -133,7 +133,7 @@ Imprimir como una fila mas abajo del board los puntos del pacman
 En esta iteracion se espera que el pacman arranque con 0 puntos, y a medida que avanza sobre las pelotitas los puntos
 se incrementan en 10.
 
-## Iteracion 4: Implementar divisores
+## Iteracion 4: _Divisores_
 
 Debe implementarse un nuevo tipo de celda, los divisores. Estos no permiten al pacman
 pasar. Si se llega al borde y no hay divisor, entonces se aparece en la misma fila/columna pero
