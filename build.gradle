@@ -1,0 +1,83 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.31'
+}
+
+group 'com.pacmankata'
+version '2.0.5'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+ext {
+    kotlinVersion = '1.3.31'
+    spekVersion = '2.0.2'
+    log4JVersion = '2.11.2'
+    vertxVersion = '3.8.3'
+    rxKotlinVersion = '2.3.0'
+    micrometerPrometheusVersion = '1.1.4'
+    sentryVersion = '1.2.2'
+    jacksonDatabindVersion = '2.9.8'
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+}
+
+dependencies {
+    compile "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+}
+
+dependencies {
+    compile "io.vertx:vertx-core:$vertxVersion"
+    compile "io.vertx:vertx-web:$vertxVersion"
+    compile "io.vertx:vertx-rx-java2:$vertxVersion"
+}
+
+dependencies {
+    compile "io.vertx:vertx-micrometer-metrics:$vertxVersion"
+    compile "io.micrometer:micrometer-registry-prometheus:$micrometerPrometheusVersion"
+}
+
+dependencies {
+    compile "org.apache.logging.log4j:log4j-api:$log4JVersion"
+    compile "org.apache.logging.log4j:log4j-core:$log4JVersion"
+    compile "org.apache.logging.log4j:log4j-slf4j-impl:$log4JVersion"
+    compile "io.sentry:sentry-log4j2:$sentryVersion"
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonDatabindVersion"
+}
+
+dependencies {
+    testImplementation "org.spekframework.spek2:spek-dsl-jvm:$spekVersion"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+    testRuntimeOnly "org.spekframework.spek2:spek-runner-junit5:$spekVersion"
+    testRuntimeOnly "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
+    testImplementation "io.vertx:vertx-junit5:$vertxVersion"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.pacmankata.Application'
+        )
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+test {
+    useJUnitPlatform {
+        includeEngines 'spek2'
+    }
+}
