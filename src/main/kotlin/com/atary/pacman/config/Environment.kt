@@ -1,4 +1,4 @@
-package com.pacmankata.config
+package com.atary.pacman.config
 
 object Environment {
     val PORT = "PORT".getOrDefaultTo("8080").toInt()
